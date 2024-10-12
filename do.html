@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>做</title>
+    <link rel="stylesheet" type="text/css" href="./login_files/mdui.min.css">
+    <link rel="stylesheet" type="text/css" href="./login_files/css.css">
+    <script src="./login_files/mdui.min.js.下载"></script>
+    <script src="./login_files/jquery.min.js"></script>
+</head>
+<body>
+    <div class="mdui-table-fluid">
+        <table class="mdui-table">
+          <thead>
+            <tr>
+              <th>名字</th>
+              <th>状态</th>
+            </tr>
+          </thead>
+          <tbody id="table">
+            
+          </tbody>
+        </table>
+      </div>
+
+
+    <script>
+        table = document.getElementById("table")
+        $.post("./list.php",{
+            cookie:localStorage.getItem('cookie')
+        },function(data) {
+            data = JSON.parse(data)
+            data = data.data
+            for (i=0; i<data.length; i++) {
+                ttt = ""
+                if(data[i].SFDTTG != "1") {
+                    ttt = `<div id="`+data[i].WJDM+`"<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" onclick="doit('`+data[i].WJDM+`')">点击刷过</button>`
+                } else {
+                    ttt = `已通过`
+                }
+                text =`<tr>
+                        <td>`+data[i].WJMC+`</td>
+                        <td>`+ttt+`</td>
+                    </tr>`
+                table.innerHTML += text
+            }
+        })
+        function doit(id) {
+            $.post("./do.php",{
+                id:id,
+                cookie:localStorage.getItem('cookie')
+            },function(data) {
+                    mdui.alert("已通过！");
+                    document.getElementById(id).innerHTML = "已通过"
+                
+            })
+        }
+    </script>
+
+</body>
+</html>
