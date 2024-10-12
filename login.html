@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html lang=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>登录一下啦，很快的~</title>
+    <link rel="stylesheet" type="text/css" href="./login_files/mdui.min.css">
+    <link rel="stylesheet" type="text/css" href="./login_files/css.css">
+    <script src="./login_files/mdui.min.js.下载"></script>
+    <script src="./login_files/jquery.min.js"></script>
+    <script src="./login_files/crypto-js.js"></script>
+    <script>
+        // 强制变量传输防止报错
+        window.alert = mdui.alert
+    </script>
+    <style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
+nav {
+  padding: 30px;
+}
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+nav a.router-link-exact-active {
+  color: #42b983;
+}
+a {
+  color: #42b983;
+}
+</style><style type="text/css">
+a[data-v-29e8c3c6] {
+  color: #42b983;
+}
+.facer[data-v-29e8c3c6] {
+    max-width: 100%;
+    height: auto;
+}
+</style><style type="text/css">
+.post-card[data-v-132d9080] {
+    position: relative;
+    top : 5px;
+    width: 100%;
+}
+.post-user-name[data-v-132d9080] {
+    margin-left: 0px;padding-left: 5px; font-size: 20px;padding-top: 3px;
+}
+</style><style type="text/css">
+h3[data-v-a83bd3b0] {
+  margin: 40px 0 0;
+}
+ul[data-v-a83bd3b0] {
+  list-style-type: none;
+  padding: 0;
+}
+li[data-v-a83bd3b0] {
+  display: inline-block;
+  margin: 0 10px;
+}
+a[data-v-a83bd3b0] {
+  color: #42b983;
+}
+.post-div[data-v-a83bd3b0] {
+    position: absolute;
+    width: 100%;
+}
+</style><style type="text/css">
+body
+{
+    background: url(http://localhost:8081/img/bg.17bc673f.jpg) no-repeat center center;                
+    background-size: cover;
+    overflow-y: hidden;
+}</style><style type="text/css">
+.login[data-v-5b8bb0cd]
+{
+	background-color: rgba(30,30,30,0.6);
+	border-radius: 15px;
+	height: 600px;
+	width: 400px;
+	margin:10px auto;
+    border:1px solid rgb(249,249,249);
+}
+.login h1[data-v-5b8bb0cd]
+{
+    text-align: center;
+    color: rgba(250,250,250,0.7);
+}
+.login h4[data-v-5b8bb0cd]
+{
+    text-align: center;
+    color: rgba(240,240,240,0.9);
+}
+.login label[data-v-5b8bb0cd]
+{
+    margin-bottom: 6px;
+    cursor: default;
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", "Noto Sans", "Noto Sans CJK SC", "Noto Sans CJK", "Source Han Sans", "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgb(245, 245, 245);
+    font-size: 15px;
+}
+.login input[data-v-5b8bb0cd]
+{
+    background-color: rgb(80,80,80);
+    color: rgb(240,240,240);
+}
+.login .login-div[data-v-5b8bb0cd]
+{
+    width: 90%;
+    margin:0 auto;
+    margin-bottom: 12px;
+}
+.login button[data-v-5b8bb0cd]
+{
+    background: rgba(50,230,50,0.6);
+    color: rgba(230,230,230,0.9);
+    left: 37%;
+}
+</style></head>
+  <body> 
+    <noscript>
+      <strong>We're sorry but wwwroot doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app" data-v-app=""><div data-v-5b8bb0cd="" class="login"><h1 data-v-5b8bb0cd="" id="bigTitle">登录</h1><h4 data-v-5b8bb0cd="">使用南工新生账号登录</h4><br data-v-5b8bb0cd=""><br data-v-5b8bb0cd=""><div data-v-5b8bb0cd="" class="login-div"><label data-v-5b8bb0cd="">用户名</label><input data-v-5b8bb0cd="" class="pp-input" placeholder="用户名" id="username"></div><div data-v-5b8bb0cd="" class="login-div"><label data-v-5b8bb0cd="">密码</label><input data-v-5b8bb0cd="" class="pp-input" type="password" placeholder="密码" id="password"></div><div data-v-5b8bb0cd="" class="login-div" id="repassword_div" style="display: none;"><label data-v-5b8bb0cd="">重复密码</label><input data-v-5b8bb0cd="" class="pp-input" type="password" placeholder="重复密码"></div><button data-v-5b8bb0cd="" class="mdui-btn mdui-color-theme-accent mdui-ripple" id="button" onclick="login()">点我登录</button><span data-v-5b8bb0cd="">&nbsp;&nbsp;&nbsp;&nbsp;</span></div></div>
+    <!-- built files will be auto injected -->
+  
+<script>
+    function getCryptoPwd(pwd) {
+  var key = CryptoJS.enc.Utf8.parse("r0aNwZvApKlj9C0r");
+  var password = CryptoJS.enc.Utf8.parse(pwd);
+  var encrypted = CryptoJS.AES.encrypt(password, key, {
+    mode: CryptoJS.mode.ECB, 
+    padding: CryptoJS.pad.Pkcs7
+  });
+  return encrypted.toString();
+}
+    function login() {
+        $("#button").attr('disabled',true)
+        document.getElementById("button").innerHTML = "在登录啦~"
+        username = document.getElementById("username").value
+        password = document.getElementById("password").value
+        password = getCryptoPwd(password)
+        if (username.length == 0 || password.length == 0) {
+            alert("请认真输入")
+            return
+        }
+        document.cookie = ""
+        $.post("./cookie.php",function() {
+            $.post("./login.php",{
+                username: username,
+                password: password,
+                cookie : document.cookie
+            },function(data) {
+                $("#button").attr('disabled',false)
+                document.getElementById("button").innerHTML = "点击登录"
+                data=JSON.parse(data)
+                console.log(data)
+                localStorage.setItem("cookie",data.cookie)
+                //document.cookie = data.cookie
+                if (data.msg == "success") {
+                    window.location.href = "/do.html"
+                    return
+                }
+                if (data.msg != "") {
+                    mdui.alert(data.msg)
+                    return
+                }
+                
+            })
+        })
+        
+    }
+</script>
+</body></html>
